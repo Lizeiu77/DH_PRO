@@ -1,7 +1,14 @@
 
 # MDK
-./firmware/workspace/project_demo/RTE
-./firmware/workspace/project_demo/Listings
-./firmware/workspace/project_demo/Objects/*.o
-./firmware/workspace/project_demo/Objects/*.d
-./firmware/workspace/project_demo/Objects/*.crf
+firmware/workspace/project_demo/RTE
+firmware/workspace/project_demo/Listings
+*.uvguix*
+
+# compiler
+*.o
+*.d
+*.crf
+*.axf
+*.htm
+*.dep
+*.lnp
