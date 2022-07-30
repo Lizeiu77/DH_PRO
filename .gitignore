@@ -1,0 +1,7 @@
+
+# MDK
+./firmware/workspace/project_demo/RTE
+./firmware/workspace/project_demo/Listings
+./firmware/workspace/project_demo/Objects/*.o
+./firmware/workspace/project_demo/Objects/*.d
+./firmware/workspace/project_demo/Objects/*.crf
