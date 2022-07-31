@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#if (PLATFORM == PLATFORM_STM32F103X)
-#include "gpio_stm32f1xx.h"
+#ifdef PLATFORM_STM32F103X
+    #include "gpio_stm32f1xx.h"
 #else
 typedef enum _Drv_Gpio_Port_s
 {

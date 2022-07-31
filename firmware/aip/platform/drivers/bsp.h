@@ -3,10 +3,10 @@
 
 #include "drv_gpio.h"
 
-#if (PLATFORM == PLATFORM_STM32F103X)
+#ifdef PROJECT_DEMO
 
-#define LED_RED_PORT     DRV_GPIO_PORT_B
-#define LED_RED_PIN      DRV_GPIO_PIN_2
+#define LED_RED_PORT     DRV_GPIO_PORT_C
+#define LED_RED_PIN      DRV_GPIO_PIN_13
 
 #endif
 

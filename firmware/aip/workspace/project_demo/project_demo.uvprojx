@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>PLATFORM_STM32F103X PROJECT_DEMO</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\platform\core\arm\cm3;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc\Legacy;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll;..\..\platform\stm32\stm32f103c8t6;..\..\platform\drivers;..\..\platform;..\..\os</IncludePath>
+              <IncludePath>..\..\device;..\..\platform\core\arm\cm3;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc\Legacy;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll;..\..\platform\stm32\stm32f103c8t6;..\..\platform\drivers;..\..\platform;..\..\os</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -392,6 +392,13 @@
         </Group>
         <Group>
           <GroupName>DEVICE</GroupName>
+          <Files>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\device\led.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>MW</GroupName>

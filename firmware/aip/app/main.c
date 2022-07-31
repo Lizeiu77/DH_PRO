@@ -3,5 +3,5 @@
 
 int32_t main(void)
 {
-	return ERR_OK;
+	while(1);
 }
