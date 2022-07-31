@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\platform\core\arm\cm3;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc\Legacy;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll;..\..\platform\drivers;..\..\platform</IncludePath>
+              <IncludePath>..\..\platform\core\arm\cm3;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc\Legacy;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll;..\..\platform\stm32\stm32f103c8t6;..\..\platform\drivers;..\..\platform;..\..\os</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -428,6 +428,11 @@
               <FileName>drv_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\platform\drivers\drv_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\drivers\bsp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -550,5 +555,20 @@
       </file>
     </files>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>&lt;Project Info&gt;</LayName>
+        <LayDesc></LayDesc>
+        <LayUrl></LayUrl>
+        <LayKeys></LayKeys>
+        <LayCat></LayCat>
+        <LayLic></LayLic>
+        <LayTarg>0</LayTarg>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "data_type.h": "c",
+        "stdint.h": "c",
+        "gpio_stm32f1xx.h": "c",
+        "stm32f1xx_ll_gpio.h": "c"
+    }
+}

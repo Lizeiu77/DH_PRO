@@ -1,7 +1,7 @@
 
 # MDK
-firmware/workspace/project_demo/RTE
-firmware/workspace/project_demo/Listings
+firmware/aip/workspace/project_demo/RTE
+firmware/aip/workspace/project_demo/Listings
 *.uvguix*
 
 # compiler

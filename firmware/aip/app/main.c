@@ -1,7 +1,7 @@
 #include <stdint.h>
-#include "stm32f103xb.h"
+#include "data_type.h"
 
 int32_t main(void)
 {
-	return 0;
+	return ERR_OK;
 }
