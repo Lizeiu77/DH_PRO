@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>PLATFORM_STM32F103X PROJECT_DEMO</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\device;..\..\platform\core\arm\cm3;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc\Legacy;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll;..\..\platform\stm32\stm32f103c8t6;..\..\platform\drivers;..\..\platform;..\..\os</IncludePath>
+              <IncludePath>..\..\device;..\..\platform\core\arm\cm3;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc\Legacy;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\inc;..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll;..\..\platform\stm32\stm32f103c8t6;..\..\platform\drivers;..\..\platform;..\..\common\fifo;..\..\os</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -404,6 +404,16 @@
           <GroupName>MW</GroupName>
         </Group>
         <Group>
+          <GroupName>COMMON</GroupName>
+          <Files>
+            <File>
+              <FileName>fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\fifo\fifo.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>DRIVERS</GroupName>
           <Files>
             <File>
@@ -441,6 +451,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\platform\drivers\bsp.c</FilePath>
             </File>
+            <File>
+              <FileName>drv_platform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\drivers\drv_platform.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -465,6 +480,11 @@
               <FileName>uart_stm32f1xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\platform\stm32\stm32f103c8t6\uart_stm32f1xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>platform_stm32f1xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\stm32\stm32f103c8t6\platform_stm32f1xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -505,6 +525,16 @@
               <FileName>system_stm32f1xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\src\system_stm32f1xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\src\stm32f1xx_ll_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\stm32\stm32f103c8t6\stm32f1xx_ll\src\stm32f1xx_ll_utils.c</FilePath>
             </File>
           </Files>
         </Group>

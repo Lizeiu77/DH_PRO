@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
- #include "platform_config.h"
+#include "platform_config.h"
 
 #if defined(USE_FULL_LL_DRIVER)
 
