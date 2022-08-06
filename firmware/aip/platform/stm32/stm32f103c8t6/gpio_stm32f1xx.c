@@ -29,7 +29,15 @@ void EXTI4_IRQHandler(void) __ATTRIBUTE_ALIAS__(Stm32f1xx_Gpio_Exti_4_Handler);
 void EXTI9_5_IRQHandler(void) __ATTRIBUTE_ALIAS__(Stm32f1xx_Gpio_Exti_5to9_Handler);
 void EXTI15_10_IRQHandler(void) __ATTRIBUTE_ALIAS__(Stm32f1xx_Gpio_Exti_10to15_Handler);
 
+/** @defgroup EXTI_LL_EC_LINE LINE
+  * @
+  */
 #define STM32F1XX_GPIO_EXIT_LINE(pin)    ((0x1U) << (pin))
+
+/** @defgroup GPIO_LL_EC_EXTI_LINE GPIO EXTI LINE
+  * @
+  */
+#define STM32F1XX_GPIO_AF_EXIT_LINE(pin)    (((0x000FU) << (((pin)%(4))*(4))) << (16U) | ((pin)>>(2)))
 
 static Drv_Gpio_IsrHook_f s_gpio_isr_map[DRV_GPIO_PIN_NUM] = { NULL };      //interrupt service routine
 
@@ -68,6 +76,25 @@ static uint32_t s_gpio_pin_map[DRV_GPIO_PIN_NUM] = {
     [DRV_GPIO_PIN_15] = LL_GPIO_PIN_15,
 };
 
+static IRQn_Type s_gpio_irq_map[DRV_GPIO_PIN_NUM] = {
+    [DRV_GPIO_PIN_0] = EXTI0_IRQn,
+    [DRV_GPIO_PIN_1] = EXTI1_IRQn,
+    [DRV_GPIO_PIN_2] = EXTI2_IRQn,
+    [DRV_GPIO_PIN_3] = EXTI3_IRQn,
+    [DRV_GPIO_PIN_4] = EXTI4_IRQn,
+    [DRV_GPIO_PIN_5] = EXTI9_5_IRQn,
+    [DRV_GPIO_PIN_6] = EXTI9_5_IRQn,
+    [DRV_GPIO_PIN_7] = EXTI9_5_IRQn,
+    [DRV_GPIO_PIN_8] = EXTI9_5_IRQn,
+    [DRV_GPIO_PIN_9] = EXTI9_5_IRQn,
+    [DRV_GPIO_PIN_10] = EXTI15_10_IRQn,
+    [DRV_GPIO_PIN_11] = EXTI15_10_IRQn,
+    [DRV_GPIO_PIN_12] = EXTI15_10_IRQn,
+    [DRV_GPIO_PIN_13] = EXTI15_10_IRQn,
+    [DRV_GPIO_PIN_14] = EXTI15_10_IRQn,
+    [DRV_GPIO_PIN_15] = EXTI15_10_IRQn,
+};
+
 int32_t Stm32f1xx_Gpio_Read(Drv_Gpio_Port_e port, Drv_Gpio_Pin_e pin, Drv_Gpio_Level_e *level)
 {
     if(port >= DRV_GPIO_PORT_NUM || pin >= DRV_GPIO_PIN_NUM)
@@ -101,7 +128,7 @@ int32_t Stm32f1xx_Gpio_IsrHook(Drv_Gpio_Port_e port, Drv_Gpio_Pin_e pin, Drv_Gpi
     {
         return ERR_NG;
     }
-    s_gpio_isr_map[port] = isr;
+    s_gpio_isr_map[pin] = isr;
     return ERR_OK;
 }
 
@@ -299,20 +326,18 @@ int32_t Stm32f1xx_Gpio_Init(Drv_Gpio_t gpio)
 
     gpio_init.Pin = s_gpio_pin_map[gpio.pin];
     gpio_init.Speed = LL_GPIO_SPEED_FREQ_LOW;
+    //set gpio pull of input mode
+    if(gpio.intput_mode == DRV_GPIO_PULLUP) {
+        gpio_init.Pull = LL_GPIO_PULL_UP;
+    } else if(gpio.intput_mode == DRV_GPIO_PULLDOWN){
+        gpio_init.Pull = LL_GPIO_PULL_DOWN;
+    }
 
     switch(gpio.mode)
     {
         case DRV_GPIO_INPUT:
         {
             gpio_init.Mode = LL_GPIO_MODE_INPUT;
-            if(gpio.intput_mode >= DRV_GPIO_INTPUTMODE_NUM) {
-                return ERR_NG;
-            }
-            if(gpio.intput_mode == DRV_GPIO_PULLUP) {
-                gpio_init.Pull = LL_GPIO_PULL_UP;
-            } else {
-                gpio_init.Pull = LL_GPIO_PULL_DOWN;
-            }
             break;
         }
 
@@ -334,10 +359,13 @@ int32_t Stm32f1xx_Gpio_Init(Drv_Gpio_t gpio)
         {
             LL_EXTI_InitTypeDef exit_init = {0};
 
+            LL_GPIO_AF_SetEXTISource((uint32_t)gpio.port, STM32F1XX_GPIO_AF_EXIT_LINE(gpio.pin));
+
             exit_init.Line_0_31 = STM32F1XX_GPIO_EXIT_LINE(gpio.pin);
             exit_init.LineCommand = ENABLE;
             exit_init.Mode = LL_EXTI_MODE_IT;
 
+            //set edge direction of external interrupt mode
             if(gpio.trigger == DRV_GPIO_RISING) {
                 exit_init.Trigger = LL_EXTI_TRIGGER_RISING;
             } else if(gpio.trigger == DRV_GPIO_FALLING) {
@@ -345,6 +373,12 @@ int32_t Stm32f1xx_Gpio_Init(Drv_Gpio_t gpio)
             } else if(gpio.trigger == DRV_GPIO_RISING_FALLING) {
                 exit_init.Trigger = LL_EXTI_TRIGGER_RISING_FALLING;
             }
+
+            //set gpio mode
+            gpio_init.Mode = LL_GPIO_MODE_INPUT;
+
+            NVIC_SetPriority(s_gpio_irq_map[gpio.pin], NVIC_EncodePriority(NVIC_GetPriorityGrouping(),2, 0));
+            NVIC_EnableIRQ(s_gpio_irq_map[gpio.pin]);
             
             LL_EXTI_Init(&exit_init);
             break;
